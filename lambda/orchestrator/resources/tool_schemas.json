@@ -1,0 +1,90 @@
+[
+  {
+    "name": "classify_call_type",
+    "description": "Classify the meeting as support, external, or internal based on title pattern. Always call this first.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"}
+      },
+      "required": ["title"]
+    }
+  },
+  {
+    "name": "classify_category",
+    "description": "Map the meeting's upstream topics to a taxonomy category (Product Reliability, Compliance & Audit, Customer Risk, Revenue & Contracts, Product Development, Identity & Security, Onboarding & Adoption, or Other).",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "topics": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["topics"]
+    }
+  },
+  {
+    "name": "analyze_sentiment",
+    "description": "Compute sentiment baseline comparison and anomaly flag for this call type.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "call_type":      {"type": "string"},
+        "upstream_score": {"type": "number"},
+        "upstream_label": {"type": "string"}
+      },
+      "required": ["call_type", "upstream_score", "upstream_label"]
+    }
+  },
+  {
+    "name": "extract_issues",
+    "description": "Mine issues from the summary text and key moments. Returns issues with severity p0-p3.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "summary_text": {"type": "string"},
+        "key_moments":  {"type": "array", "items": {"type": "object"}}
+      },
+      "required": ["summary_text"]
+    }
+  },
+  {
+    "name": "route_escalation",
+    "description": "Determine escalation routing based on category, severity, sentiment, and anomaly flag.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "category":        {"type": "string"},
+        "severity":        {"type": "string", "description": "Highest severity from extract_issues: p0, p1, p2, p3, or none"},
+        "sentiment_score": {"type": "number"},
+        "is_anomaly":      {"type": "boolean"},
+        "call_type":       {"type": "string"}
+      },
+      "required": ["category", "severity", "sentiment_score", "is_anomaly", "call_type"]
+    }
+  },
+  {
+    "name": "save_record",
+    "description": "Persist the final analysed record to DynamoDB. Call last after all analysis is complete.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "meeting_id":       {"type": "string"},
+        "title":            {"type": "string"},
+        "call_type":        {"type": "string"},
+        "category":         {"type": "string"},
+        "sentiment_score":  {"type": "number"},
+        "sentiment_label":  {"type": "string"},
+        "is_anomaly":       {"type": "boolean"},
+        "z_score":          {"type": "number"},
+        "issues":           {"type": "array"},
+        "escalation":       {"type": "object"},
+        "processed_bucket": {"type": "string"},
+        "processed_at":     {"type": "string"}
+      },
+      "required": [
+        "meeting_id", "title", "call_type", "category",
+        "sentiment_score", "sentiment_label", "is_anomaly", "z_score",
+        "issues", "escalation", "processed_bucket", "processed_at"
+      ]
+    }
+  }
+]

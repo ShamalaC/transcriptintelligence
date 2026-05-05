@@ -1,10 +1,39 @@
-*.swp
-package-lock.json
-__pycache__
-.pytest_cache
-.venv
-*.egg-info
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
 
-# CDK asset staging directory
-.cdk.staging
-cdk.out
+# Virtual environments
+.venv/
+venv/
+
+# CDK
+.cdk.staging/
+cdk.out/
+
+# Lambda layers — compiled binaries, rebuilt by scripts/build_layer.sh
+lambda/anthropic_layer/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Environment — never commit secrets
+.env
+*.env
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Office temp files
+~$*
+
+# Submission artifacts — large video/deck not for source control
+Submission/
+
+# Local sample data — transcript dataset, not for source control
+data/

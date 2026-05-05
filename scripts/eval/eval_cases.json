@@ -1,0 +1,235 @@
+{
+  "classify_call_type": [
+    {
+      "id": "ct_001",
+      "input": {"title": "Support Case #42: Login Flow Issue"},
+      "expected": {"call_type": "support"}
+    },
+    {
+      "id": "ct_002",
+      "input": {"title": "Aegis / Acme Corp - Annual Renewal"},
+      "expected": {"call_type": "external"}
+    },
+    {
+      "id": "ct_003",
+      "input": {"title": "Sprint Planning - Backend Team"},
+      "expected": {"call_type": "internal"}
+    },
+    {
+      "id": "ct_004",
+      "input": {"title": "Support Case: Billing Dispute"},
+      "expected": {"call_type": "support"}
+    },
+    {
+      "id": "ct_005",
+      "input": {"title": "Aegis / TechCorp SAML Setup"},
+      "expected": {"call_type": "external"}
+    },
+    {
+      "id": "ct_006",
+      "input": {"title": "All Hands - Engineering Q2"},
+      "expected": {"call_type": "internal"}
+    },
+    {
+      "id": "ct_007",
+      "input": {"title": "Support Case #99: API Timeout Errors"},
+      "expected": {"call_type": "support"}
+    }
+  ],
+
+  "classify_category": [
+    {
+      "id": "cc_001",
+      "input": {"topics": ["outage", "incident", "p0"]},
+      "expected": {"primary_category": "Incident Response"}
+    },
+    {
+      "id": "cc_002",
+      "input": {"topics": ["soc2", "hipaa", "compliance review"]},
+      "expected": {"primary_category": "Compliance & Audit"}
+    },
+    {
+      "id": "cc_003",
+      "input": {"topics": ["churn risk", "renewal", "competitive"]},
+      "expected": {"primary_category": "Commercial & Renewal"}
+    },
+    {
+      "id": "cc_004",
+      "input": {"topics": ["billing", "overage", "invoice"]},
+      "expected": {"primary_category": "Commercial & Renewal"}
+    },
+    {
+      "id": "cc_005",
+      "input": {"topics": ["roadmap", "sprint", "feature"]},
+      "expected": {"primary_category": "Product Feedback & Roadmap"}
+    },
+    {
+      "id": "cc_006",
+      "input": {"topics": ["saml", "sso", "identity provisioning"]},
+      "expected": {"primary_category": "Onboarding & Deployment"}
+    },
+    {
+      "id": "cc_007",
+      "input": {"topics": ["onboarding", "deployment", "implementation"]},
+      "expected": {"primary_category": "Onboarding & Deployment"}
+    },
+    {
+      "id": "cc_008",
+      "input": {"topics": ["general discussion", "misc"]},
+      "expected": {"primary_category": "Other"}
+    },
+    {
+      "id": "cc_009",
+      "note": "First match wins — Incident Response comes before Compliance & Audit in TAXONOMY",
+      "input": {"topics": ["outage", "compliance"]},
+      "expected": {"primary_category": "Incident Response"}
+    }
+  ],
+
+  "analyze_sentiment": [
+    {
+      "id": "as_001",
+      "note": "Support below baseline by 2.4 std devs — anomaly",
+      "input": {"call_type": "support", "upstream_score": 1.0, "upstream_label": "negative"},
+      "expected": {"is_anomaly": true, "label": "negative"}
+    },
+    {
+      "id": "as_002",
+      "note": "Support near baseline — not anomaly",
+      "input": {"call_type": "support", "upstream_score": 3.0, "upstream_label": "mixed"},
+      "expected": {"is_anomaly": false, "label": "mixed"}
+    },
+    {
+      "id": "as_003",
+      "note": "External near baseline — not anomaly",
+      "input": {"call_type": "external", "upstream_score": 4.5, "upstream_label": "positive"},
+      "expected": {"is_anomaly": false, "label": "positive"}
+    },
+    {
+      "id": "as_004",
+      "note": "External far below baseline — anomaly (z = -3.39)",
+      "input": {"call_type": "external", "upstream_score": 1.5, "upstream_label": "negative"},
+      "expected": {"is_anomaly": true, "label": "negative"}
+    },
+    {
+      "id": "as_005",
+      "note": "Internal above baseline by 1.97 std devs — anomaly (unexpectedly positive)",
+      "input": {"call_type": "internal", "upstream_score": 5.0, "upstream_label": "positive"},
+      "expected": {"is_anomaly": true, "label": "positive"}
+    },
+    {
+      "id": "as_006",
+      "note": "Support above baseline — anomaly (z = 1.95)",
+      "input": {"call_type": "support", "upstream_score": 4.5, "upstream_label": "positive"},
+      "expected": {"is_anomaly": true, "label": "positive"}
+    }
+  ],
+
+  "extract_issues": [
+    {
+      "id": "ei_001",
+      "note": "p0 keyword present — should return severity p0",
+      "input": {
+        "summary_text": "Production outage affecting all users. Services are down.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 1, "issues[0].severity": "p0"}
+    },
+    {
+      "id": "ei_002",
+      "note": "p1 keyword only",
+      "input": {
+        "summary_text": "Service is degraded, response times are impacted.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 1, "issues[0].severity": "p1"}
+    },
+    {
+      "id": "ei_003",
+      "note": "p2 keyword only",
+      "input": {
+        "summary_text": "Intermittent errors in the reporting dashboard.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 1, "issues[0].severity": "p2"}
+    },
+    {
+      "id": "ei_004",
+      "note": "p3 keyword only",
+      "input": {
+        "summary_text": "Customer has a minor question about billing thresholds.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 1, "issues[0].severity": "p3"}
+    },
+    {
+      "id": "ei_005",
+      "note": "p0 short-circuits — p1 keyword also present but ignored",
+      "input": {
+        "summary_text": "Critical outage detected. Service is also degraded in secondary region.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 1, "issues[0].severity": "p0"}
+    },
+    {
+      "id": "ei_006",
+      "note": "No keywords — empty issues list",
+      "input": {
+        "summary_text": "Team discussed quarterly goals and capacity planning.",
+        "key_moments_json": "[]"
+      },
+      "expected": {"n_issues": 0}
+    }
+  ],
+
+  "route_escalation": [
+    {
+      "id": "re_001",
+      "note": "Direct rule: (Incident Response, p0) -> engineering",
+      "input": {"category": "Incident Response", "severity": "p0", "sentiment_score": 1.0, "is_anomaly": true, "call_type": "support"},
+      "expected": {"team": "engineering", "pagerduty": true}
+    },
+    {
+      "id": "re_002",
+      "note": "Direct rule: (Incident Response, p1) -> engineering",
+      "input": {"category": "Incident Response", "severity": "p1", "sentiment_score": 2.0, "is_anomaly": false, "call_type": "support"},
+      "expected": {"team": "engineering", "pagerduty": true}
+    },
+    {
+      "id": "re_003",
+      "note": "Direct rule: (Compliance & Audit, p0) -> security",
+      "input": {"category": "Compliance & Audit", "severity": "p0", "sentiment_score": 2.5, "is_anomaly": true, "call_type": "external"},
+      "expected": {"team": "security", "pagerduty": true}
+    },
+    {
+      "id": "re_004",
+      "note": "Direct rule: (Account Health & QBR, p1) -> account",
+      "input": {"category": "Account Health & QBR", "severity": "p1", "sentiment_score": 2.0, "is_anomaly": true, "call_type": "external"},
+      "expected": {"team": "account", "pagerduty": true}
+    },
+    {
+      "id": "re_005",
+      "note": "Direct rule: (Commercial & Renewal, p1) -> cs",
+      "input": {"category": "Commercial & Renewal", "severity": "p1", "sentiment_score": 3.0, "is_anomaly": false, "call_type": "external"},
+      "expected": {"team": "cs", "pagerduty": true}
+    },
+    {
+      "id": "re_006",
+      "note": "Fallback: no rule, severity p0 -> engineering",
+      "input": {"category": "Other", "severity": "p0", "sentiment_score": 2.0, "is_anomaly": false, "call_type": "support"},
+      "expected": {"team": "engineering", "pagerduty": true}
+    },
+    {
+      "id": "re_007",
+      "note": "Fallback: no rule, anomaly + low score -> cs",
+      "input": {"category": "Other", "severity": "p3", "sentiment_score": 2.0, "is_anomaly": true, "call_type": "support"},
+      "expected": {"team": "cs", "pagerduty": false}
+    },
+    {
+      "id": "re_008",
+      "note": "Fallback: no rule, no escalation trigger -> support",
+      "input": {"category": "Product Development", "severity": "p3", "sentiment_score": 3.5, "is_anomaly": false, "call_type": "internal"},
+      "expected": {"team": "support", "pagerduty": false, "requires_escalation": false}
+    }
+  ]
+}
