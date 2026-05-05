@@ -1,24 +1,55 @@
 # Transcript Intelligence
 
 **B2B Enterprise SaaS · Automated Call Transcript Analysis Pipeline**
-*Take-home assignment — Aegis Cloud Security scenario*
+*Take-home assignment - Aegis Cloud Security scenario*
 
 ---
 
 ## What This Is
 
-Transcript Intelligence automatically processes call transcripts across three call types — customer support, external account calls, and internal meetings — and surfaces actionable intelligence for four stakeholder groups: Customer Success, Support Ops, Product Management, and Engineering Leadership.
+Transcript Intelligence automatically processes call transcripts across three call types — customer support, external account calls, and internal meetings and surfaces actionable intelligence for four stakeholder groups: Customer Success, Support Ops, Product Management, and Engineering Leadership.
+
+## Architecture
+
+<img width="861" height="667" alt="image" src="https://github.com/user-attachments/assets/22442e5e-6de1-4290-805a-f2f2f4f19dc5" />
+
 
 **Five key findings from the dataset:**
 | # | Finding | Impact |
 |---|---|---|
 | 1 | One incident drove 36% of all call volume | March 2026 Detect pipeline outage is the dominant signal |
-| 2 | Feb→Mar sentiment drop: -0.90 pts (4.2σ, p<0.0001) | Statistically significant — real event, not variance |
+| 2 | Feb→Mar sentiment drop: -0.90 pts (4.2σ, p<0.0001) | Statistically significant - real event, not variance |
 | 3 | 10 enterprise accounts at churn risk | 3 in active competitive evaluations |
 | 4 | Compliance & Audit avg sentiment 4.40 — highest category | Near-term expansion revenue opportunity |
 | 5 | Feature gaps in 49% of all meetings | Voice-of-customer roadmap signal hidden in plain sight |
 
 ---
+**DATASET & SCOPE**
+<img width="902" height="333" alt="image" src="https://github.com/user-attachments/assets/dcb7026e-8ece-46da-8510-f8c03ae81a7c" />
+
+**Category Results**
+<img width="485" height="267" alt="image" src="https://github.com/user-attachments/assets/a669465e-0ba3-4c93-9d0c-a910bf5218e2" />
+
+**Sentiment Analysis**
+<img width="881" height="274" alt="image" src="https://github.com/user-attachments/assets/e7b088b9-7417-4e75-a575-42d9383e8276" />
+
+**The March Story**
+<img width="922" height="281" alt="image" src="https://github.com/user-attachments/assets/1a0b0378-61c8-49d8-8930-51d1a3cf29f7" />
+
+**Anamolies**
+<img width="504" height="395" alt="image" src="https://github.com/user-attachments/assets/53a2f641-2ef6-4963-808e-89a78eb98068" />
+
+**ACCOUNT CHURN RISK RADAR**
+<img width="498" height="396" alt="image" src="https://github.com/user-attachments/assets/e07b8170-410e-45fa-bbbf-4baeacc9dfe8" />
+
+**OUTAGE BLAST RADIUS TRACKING**
+<img width="512" height="423" alt="image" src="https://github.com/user-attachments/assets/bc598e25-2219-43fb-899e-3636ccf97a6a" />
+
+**FEATURE GAP INTELLIGENCE**
+<img width="490" height="423" alt="image" src="https://github.com/user-attachments/assets/d84c8337-9676-470b-a1b0-63a5cef77726" />
+
+**Escalation**
+<img width="498" height="235" alt="image" src="https://github.com/user-attachments/assets/4b0f000c-6884-4fe6-82d1-24b98e322cd5" />
 
 ## Start Here
 
@@ -46,9 +77,6 @@ python scripts/eval/eval_runner.py
 │       ├── meeting-info.json                     # Title, attendees, timestamps
 │       ├── summary.json                          # Sentiment, topics, key moments
 │       └── transcript.json                       # Raw transcript segments
-│
-├── docs/                                         # Generated charts (fig_01–fig_10)
-│   └── slides.html                               # Presentation slide deck
 │
 ├── lambda/
 │   ├── agent_actions/handler.py                  # 6 tool functions (classify, analyse, route…)
