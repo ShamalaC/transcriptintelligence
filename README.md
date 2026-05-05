@@ -1,7 +1,7 @@
 # Transcript Intelligence
 
 **B2B Enterprise SaaS · Automated Call Transcript Analysis Pipeline**
-*Take-home assignment - Aegis Cloud Security scenario*
+*Take-home assignment*
 
 ---
 
