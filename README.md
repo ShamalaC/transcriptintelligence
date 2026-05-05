@@ -37,18 +37,61 @@ Transcript Intelligence automatically processes call transcripts across three ca
 **Category Results**
 <img width="485" height="267" alt="image" src="https://github.com/user-attachments/assets/a669465e-0ba3-4c93-9d0c-a910bf5218e2" />
 
-**What this shows:** the 9 Business Moment categories ranked by call volume, with average sentiment per category beside each.
+The first chart shows the distribution of meetings across primary categories.
 
-**What to look for:** the inverse correlation between volume and sentiment. The categories with the highest call volume (Incident Response, Technical Support) sit at the bottom of the sentiment ranking. The happiest categories (Onboarding, Compliance) have far fewer calls. This is a healthy pattern - most customer conversations are routine, painful conversations are loud but rare. If Incident Response volume ever overtakes Technical Support, something is structurally wrong with the product.
+- **Technical Support** was the largest category, with **30 meetings**.
+- Other major categories included:
+  - **Internal Planning & Engineering**: 13 meetings
+  - **Commercial & Renewal**: 12 meetings
+  - **Incident Response**: 11 meetings
+  - **Compliance & Audit**: 10 meetings
+- Smaller categories included Account Health & QBR, Product Feedback & Roadmap, Onboarding & Deployment, and Competitive Intelligence.
+
+This indicates that support-related conversations made up the largest share of the analyzed meeting set.
 
 **Sentiment Analysis**
 <img width="881" height="274" alt="image" src="https://github.com/user-attachments/assets/e7b088b9-7417-4e75-a575-42d9383e8276" />
+The sentiment distribution compares actual meeting sentiment against baseline expectations for three call types:
+
+- **Support Calls**: 27 meetings  
+  - Average sentiment: **2.94**
+  - Matches the baseline sentiment of **2.94**
+  - Sentiment is generally neutral to slightly negative.
+
+- **External Calls**: 40 meetings  
+  - Average sentiment: **3.85**
+  - Below the baseline of **4.21**
+  - External calls remain relatively positive, but slightly under expected sentiment.
+
+- **Internal Calls**: 33 meetings  
+  - Average sentiment: **3.28**
+  - Slightly below the baseline of **3.42**
+  - Internal sentiment shows more variation across meetings.
 
 **The March Story**
 <img width="922" height="281" alt="image" src="https://github.com/user-attachments/assets/1a0b0378-61c8-49d8-8930-51d1a3cf29f7" />
+The monthly trend chart highlights a clear sentiment drop in March.
+
+- Overall sentiment decreased from **3.68 in February** to **2.78 in March**.
+- The chart flags a **Detect Pipeline Outage on March 10**, which appears to be associated with the March sentiment decline.
+- Sentiment recovered in April, rising to **3.83**.
+- External calls remained the strongest sentiment category overall, while support calls stayed lower but more stable.
+
+This suggests March was an anomalous month, likely impacted by the pipeline outage, followed by recovery in April.
 
 **Anamolies**
 <img width="504" height="395" alt="image" src="https://github.com/user-attachments/assets/53a2f641-2ef6-4963-808e-89a78eb98068" />
+The anomaly detection chart uses sentiment z-scores to identify meetings that significantly deviated from normal sentiment patterns.
+
+- The normal range is shown between approximately **-1.5 and +1.5 z-score**.
+- Meetings outside this range are marked as anomalies.
+- Total anomalies detected: **25 out of 100 meetings**
+- By call type:
+  - **Support**: 3 anomalies out of 27 meetings
+  - **External**: 10 anomalies out of 40 meetings
+  - **Internal**: 12 anomalies out of 33 meetings
+
+Internal calls had the highest number of anomalies, suggesting greater sentiment volatility in internal discussions. External calls also showed several anomalies, while support calls were comparatively more consistent.
 
 **ACCOUNT CHURN RISK RADAR**
 <img width="498" height="396" alt="image" src="https://github.com/user-attachments/assets/e07b8170-410e-45fa-bbbf-4baeacc9dfe8" />
