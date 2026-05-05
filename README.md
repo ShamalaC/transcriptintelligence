@@ -11,6 +11,10 @@ Transcript Intelligence automatically processes call transcripts across three ca
 
 ## Architecture
 
+**What this shows:** the full data flow from raw transcript drop in S3 through to dashboard render. The left side is the ingestion + LLM analysis path (S3 → SQS → PII redaction → Bedrock Agent → DynamoDB). The right side is the analytics + access layer (DynamoDB Export → Athena → QuickSight, plus the API Gateway endpoints for chatbot, feedback, and dashboard embedding). The MCP server sits on top of DynamoDB as a parallel query interface for analyst tooling.
+
+**Key design choices visible here:** PII redaction happens *before* the LLM call (not after) so no customer PII ever reaches Bedrock. The eval suite imports directly from Lambda source so the same code path runs in production and in CI.
+
 <img width="861" height="667" alt="image" src="https://github.com/user-attachments/assets/22442e5e-6de1-4290-805a-f2f2f4f19dc5" />
 
 
@@ -26,9 +30,16 @@ Transcript Intelligence automatically processes call transcripts across three ca
 ---
 **DATASET & SCOPE**
 <img width="902" height="333" alt="image" src="https://github.com/user-attachments/assets/dcb7026e-8ece-46da-8510-f8c03ae81a7c" />
+**What this shows:** the shape of the input data. 100 meetings, three call types (support / external / internal), spread across a 6-month window from Oct 2025 to Mar 2026.
+
+**What to look for:** the call-type mix is balanced so no single type dominates the analysis. The time window is wide enough to compute a meaningful baseline (months 2-4) and detect deviation (month 3 - March).
 
 **Category Results**
 <img width="485" height="267" alt="image" src="https://github.com/user-attachments/assets/a669465e-0ba3-4c93-9d0c-a910bf5218e2" />
+
+**What this shows:** the 9 Business Moment categories ranked by call volume, with average sentiment per category beside each.
+
+**What to look for:** the inverse correlation between volume and sentiment. The categories with the highest call volume (Incident Response, Technical Support) sit at the bottom of the sentiment ranking. The happiest categories (Onboarding, Compliance) have far fewer calls. This is a healthy pattern - most customer conversations are routine, painful conversations are loud but rare. If Incident Response volume ever overtakes Technical Support, something is structurally wrong with the product.
 
 **Sentiment Analysis**
 <img width="881" height="274" alt="image" src="https://github.com/user-attachments/assets/e7b088b9-7417-4e75-a575-42d9383e8276" />
