@@ -28,7 +28,7 @@ Transcript Intelligence automatically processes call transcripts across three ca
 | 5 | Feature gaps in 49% of all meetings | Voice-of-customer roadmap signal hidden in plain sight |
 
 ---
-**DATASET & SCOPE**
+## DATASET & SCOPE
 <img width="902" height="333" alt="image" src="https://github.com/user-attachments/assets/dcb7026e-8ece-46da-8510-f8c03ae81a7c" />
 **What this shows:** the shape of the input data. 100 meetings, three call types (support / external / internal), spread across a 6-month window from Oct 2025 to Mar 2026.
 
@@ -49,7 +49,8 @@ The first chart shows the distribution of meetings across primary categories.
 
 This indicates that support-related conversations made up the largest share of the analyzed meeting set.
 
-### Sentiment Analysis
+---
+## Sentiment Analysis
 <img width="881" height="274" alt="image" src="https://github.com/user-attachments/assets/e7b088b9-7417-4e75-a575-42d9383e8276" />
 The sentiment distribution compares actual meeting sentiment against baseline expectations for three call types:
 
@@ -67,8 +68,9 @@ The sentiment distribution compares actual meeting sentiment against baseline ex
   - Average sentiment: **3.28**
   - Slightly below the baseline of **3.42**
   - Internal sentiment shows more variation across meetings.
+---
 
-### The March Story
+## The March Story
 <img width="922" height="281" alt="image" src="https://github.com/user-attachments/assets/1a0b0378-61c8-49d8-8930-51d1a3cf29f7" />
 The monthly trend chart highlights a clear sentiment drop in March.
 
@@ -79,7 +81,9 @@ The monthly trend chart highlights a clear sentiment drop in March.
 
 This suggests March was an anomalous month, likely impacted by the pipeline outage, followed by recovery in April.
 
-### Anamolies
+---
+
+## Anamolies
 <img width="504" height="395" alt="image" src="https://github.com/user-attachments/assets/53a2f641-2ef6-4963-808e-89a78eb98068" />
 The anomaly detection chart uses sentiment z-scores to identify meetings that significantly deviated from normal sentiment patterns.
 
@@ -93,7 +97,9 @@ The anomaly detection chart uses sentiment z-scores to identify meetings that si
 
 Internal calls had the highest number of anomalies, suggesting greater sentiment volatility in internal discussions. External calls also showed several anomalies, while support calls were comparatively more consistent.
 
-### ACCOUNT CHURN RISK RADAR
+---
+
+## ACCOUNT CHURN RISK RADAR
 <img width="498" height="396" alt="image" src="https://github.com/user-attachments/assets/e07b8170-410e-45fa-bbbf-4baeacc9dfe8" />
 
 This chart identifies **10 enterprise accounts with elevated churn risk** based on low sentiment scores.
@@ -111,6 +117,8 @@ This chart identifies **10 enterprise accounts with elevated churn risk** based 
   - **Ironworks Corp**
   - **Brightpath Commerce**
   - **Quantum Edge**
+
+---
 
 ## OUTAGE BLAST RADIUS TRACKING
 <img width="512" height="423" alt="image" src="https://github.com/user-attachments/assets/bc598e25-2219-43fb-899e-3636ccf97a6a" />
@@ -155,8 +163,9 @@ The outage had a clear blast radius across support, external, and internal conve
 
 Internal meetings showed the highest volume during March, suggesting significant operational coordination and incident response activity. External meetings remained elevated in April, indicating continued customer follow-up, trust rebuilding, and account management work.
 
+---
 
-## FEATURE GAP INTELLIGENCE**
+## FEATURE GAP INTELLIGENCE
 <img width="490" height="423" alt="image" src="https://github.com/user-attachments/assets/d84c8337-9676-470b-a1b0-63a5cef77726" />
 ## Feature Gap Intelligence
 
@@ -233,9 +242,10 @@ Internal conversations also surface feature gaps, especially in account health r
   
 ## Escalation
 <img width="498" height="235" alt="image" src="https://github.com/user-attachments/assets/4b0f000c-6884-4fe6-82d1-24b98e322cd5" />
-## Escalation
 
 This dashboard summarizes **automated escalation routing for 64 meetings requiring action**, including both **P0 critical** and **P1 high-priority** escalations.
+
+---
 
 ### 1. Escalation Destination by Team
 
@@ -285,6 +295,8 @@ The smaller number of Customer Success and Security escalations suggests that mo
 - Track resolution time for P0 and P1 escalations separately.
 - Share escalation trends with Engineering, Customer Success, and Security leadership.
 - Investigate whether repeated Engineering escalations point to systemic product or infrastructure issues.
+
+---
 
 ## Start Here
 
