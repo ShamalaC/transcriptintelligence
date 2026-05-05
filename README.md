@@ -179,12 +179,6 @@ Result: **36/36 (100%)** — suitable as a CI regression gate.
 
 ---
 
-## Data Note
-
-The 100 meetings in this dataset are synthetic, generated to model realistic B2B enterprise SaaS conversations across three call types. Meeting structure follows a Fireflies.ai-style export format. All company names, attendee names, and meeting content are fictitious. Synthetic data was chosen because no real transcript dataset was provided; generating structured data allowed precise control over the distribution needed to demonstrate the full range of pipeline capabilities.
-
----
-
 ## AWS Deployment (optional)
 
 ```bash
