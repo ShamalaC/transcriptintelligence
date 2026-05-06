@@ -30,7 +30,7 @@ Transcript Intelligence automatically processes call transcripts across three ca
 ---
 ## DATASET & SCOPE
 <img width="902" height="333" alt="image" src="https://github.com/user-attachments/assets/dcb7026e-8ece-46da-8510-f8c03ae81a7c" />
-**What this shows:** the shape of the input data. 100 meetings, three call types (support / external / internal), spread across a 6-month window from Oct 2025 to Mar 2026.
+**What this shows:** the shape of the input data. 100 meetings, three call types (support / external / internal), spread across a 3-month window from Feb 2026 to Mar 2026.
 
 **What to look for:** the call-type mix is balanced so no single type dominates the analysis. The time window is wide enough to compute a meaningful baseline (months 2-4) and detect deviation (month 3 - March).
 
