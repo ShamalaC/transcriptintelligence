@@ -167,7 +167,6 @@ Internal meetings showed the highest volume during March, suggesting significant
 
 ## FEATURE GAP INTELLIGENCE
 <img width="490" height="423" alt="image" src="https://github.com/user-attachments/assets/d84c8337-9676-470b-a1b0-63a5cef77726" />
-## Feature Gap Intelligence
 
 This dashboard highlights **feature-gap signals from 49 meetings**. It identifies the most common customer or internal roadmap-related topics and shows where feature gaps appear most frequently by call type and category.
 
